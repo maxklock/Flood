@@ -16,7 +16,7 @@ namespace Flood
         public class EvaluationResult
         {
             public List<OpenPipeResult> OpenPipes { get; set; }
-            public List<EndPipe> EndPipes { get; set; }
+            public List<EndPipe> MissingEndPipes { get; set; }
         }
 
         public class OpenPipeResult
@@ -41,7 +41,7 @@ namespace Flood
                 {
                     ends.Pipe.GetComponentInChildren<Renderer>().material.color = Color.yellow;
                 }
-                foreach (var ends in EndPipes.Where(p => !result.EndPipes.Contains(p)))
+                foreach (var ends in EndPipes.Where(p => !result.MissingEndPipes.Contains(p)))
                 {
                     ends.GetComponentInChildren<Renderer>().material.color = Color.yellow;
                 }
@@ -69,7 +69,7 @@ namespace Flood
             }
         }
 
-        private EvaluationResult EvaluatePipes()
+        public EvaluationResult EvaluatePipes()
         {
             var pipesProcess = new Queue<Pipe>();
             var pipesDone = new List<Pipe>();
@@ -115,7 +115,7 @@ namespace Flood
             return new EvaluationResult
             {
                 OpenPipes = pipesOpen,
-                EndPipes = pipesEnds
+                MissingEndPipes = pipesEnds
             };
         }
     }
