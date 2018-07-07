@@ -6,12 +6,28 @@ using UnityEngine;
 
 namespace Flood
 {
+    using System.Text;
+
     public class LevelEvaluation : MonoBehaviour
     {
+        public int Connected = 0;
+        public int Dropped = 0;
+        public int Points = 0;
+
         private StartPipe[] _pipes;
         private VisualClock _clock;
 
+        public TextMesh StatsText;
+
         private bool _evaluated;
+
+        private const string PrefixConnected = "Connected Pipes:\t\t";
+        private const string PrefixDropped = "Dropped Pipes:\t\t";
+        private const string PrefixPoints = "Points:\t\t\t\t\t\t";
+        private const string PrefixOpenPipes = "Open Pipes:\t\t\t\t";
+        private const string PrefixMissingsEnds = "Missing Ends:\t\t\t";
+
+        private const string Space = "\t\t\t\t";
 
         // Use this for initialization
         void Start()
@@ -23,6 +39,17 @@ namespace Flood
         // Update is called once per frame
         void Update()
         {
+            var result = Evaluate();
+
+            var strBuilder = new StringBuilder();
+            strBuilder.AppendLine($"{PrefixConnected}{Space}{Connected}");
+            strBuilder.AppendLine($"{PrefixDropped}{Space}{Dropped}");
+            strBuilder.AppendLine($"{PrefixPoints}{Space}{Points}");
+            strBuilder.AppendLine();
+            strBuilder.AppendLine($"{PrefixOpenPipes}{Space}{result.OpenEnds.Count}");
+            strBuilder.AppendLine($"{PrefixMissingsEnds}{Space}{result.MissingEnds.Count}");
+            StatsText.text = strBuilder.ToString();
+
             if (_evaluated)
             {
                 return;
@@ -30,14 +57,21 @@ namespace Flood
 
             if (_clock.RemainingTime < 0)
             {
-                Evaluate();
+                Debug.Log($"You have {result.OpenEnds.Count} open pipes and {result.MissingEnds.Count} ends are missing.");
+                _evaluated = true;
             }
         }
 
-        public void Evaluate()
+        public class EvaluationResult
+        {
+            public List<StartPipe.OpenPipeResult> OpenEnds { get; set; }
+            public List<EndPipe> MissingEnds { get; set; }
+        }
+
+        public EvaluationResult Evaluate()
         {
             var results = _pipes.Select(p => p.EvaluatePipes()).ToList();
-            var result = new
+            return new EvaluationResult
             {
                 OpenEnds = results.Select(r => r.OpenPipes).Aggregate(
                     new List<StartPipe.OpenPipeResult>(),
@@ -54,10 +88,6 @@ namespace Flood
                         return res;
                     }),
             };
-
-            Debug.Log($"You have {result.OpenEnds.Count} open pipes and {result.MissingEnds.Count} ends are missing.");
-
-            _evaluated = true;
         }
     }
 }

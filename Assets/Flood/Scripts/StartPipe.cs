@@ -115,7 +115,7 @@ namespace Flood
             return new EvaluationResult
             {
                 OpenPipes = pipesOpen,
-                MissingEndPipes = pipesEnds
+                MissingEndPipes = EndPipes.Where(p => !pipesEnds.Contains(p)).ToList()
             };
         }
     }
