@@ -200,6 +200,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &78874806 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1135766406524474, guid: 652fc39c8526a9f4d82933d183cc378a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1425174433}
+--- !u!114 &78874811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 78874806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d46084e4ccf9bf49a3468c8dde2dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonDeep: 0.025
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +545,68 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1191133442}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1425174433
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.094
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -3.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.66879755
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.74344456
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -83.949005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845247145124066, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297736115441392, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.74417806
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631367745492210, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631367745492210, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.194
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1446217871
 Prefab:
   m_ObjectHideFlags: 0
@@ -813,6 +892,11 @@ Prefab:
       propertyPath: MRCameraParent
       value: 
       objectReference: {fileID: 725115646}
+    - target: {fileID: 114906181471556868, guid: 922b5617429cd7b498259bf0a9b3a0a2,
+        type: 2}
+      propertyPath: GrabDistance
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 922b5617429cd7b498259bf0a9b3a0a2, type: 2}
   m_IsPrefabParent: 0
@@ -859,6 +943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ends: 00000000
+  EndPipes: []
 --- !u!65 &2001203761
 BoxCollider:
   m_ObjectHideFlags: 0
