@@ -45,10 +45,12 @@
 
             if (placeable)
             {
+                LevelEvaluation.Instance.Connected++;
                 GetComponentInChildren<Renderer>().material = material;
             }
             else
             {
+                LevelEvaluation.Instance.Dropped++;
                 GetComponentInChildren<Rigidbody>().isKinematic = false;
             }
         }

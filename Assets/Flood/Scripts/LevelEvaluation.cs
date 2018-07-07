@@ -8,16 +8,21 @@ namespace Flood
 {
     using System.Text;
 
-    public class LevelEvaluation : MonoBehaviour
+    using HoloToolkit.Unity;
+
+    public class LevelEvaluation : SingleInstance<LevelEvaluation>
     {
-        public int Connected = 0;
-        public int Dropped = 0;
-        public int Points = 0;
+        private EvaluationResult _result;
+
+        public int Connected;
+        public int Dropped;
+        public int Points;
 
         private StartPipe[] _pipes;
         private VisualClock _clock;
 
         public TextMesh StatsText;
+        public TextMesh StatsTitle;
 
         private bool _evaluated;
 
@@ -39,33 +44,42 @@ namespace Flood
         // Update is called once per frame
         void Update()
         {
-            var result = Evaluate();
-
-            var strBuilder = new StringBuilder();
-            strBuilder.AppendLine($"{PrefixConnected}{Space}{Connected}");
-            strBuilder.AppendLine($"{PrefixDropped}{Space}{Dropped}");
-            strBuilder.AppendLine($"{PrefixPoints}{Space}{Points}");
-            strBuilder.AppendLine();
-            strBuilder.AppendLine($"{PrefixOpenPipes}{Space}{result.OpenEnds.Count}");
-            strBuilder.AppendLine($"{PrefixMissingsEnds}{Space}{result.MissingEnds.Count}");
-            StatsText.text = strBuilder.ToString();
 
             if (_evaluated)
             {
                 return;
             }
 
+            _result = Evaluate();
+
             if (_clock.RemainingTime < 0)
             {
-                Debug.Log($"You have {result.OpenEnds.Count} open pipes and {result.MissingEnds.Count} ends are missing.");
-                _evaluated = true;
+                Finish();
             }
+
+            var strBuilder = new StringBuilder();
+            strBuilder.AppendLine($"{PrefixConnected}{Space}{Connected}");
+            strBuilder.AppendLine($"{PrefixDropped}{Space}{Dropped}");
+            strBuilder.AppendLine($"{PrefixPoints}{Space}{Points}");
+            strBuilder.AppendLine();
+            strBuilder.AppendLine($"{PrefixOpenPipes}{Space}{_result.OpenEnds.Count}");
+            strBuilder.AppendLine($"{PrefixMissingsEnds}{Space}{_result.MissingEnds.Count}");
+            StatsText.text = strBuilder.ToString();
+        }
+        
+        public struct EvaluationResult
+        {
+            public List<StartPipe.OpenPipeResult> OpenEnds;
+
+            public List<EndPipe> MissingEnds;
+
+            public float ReminingTime;
         }
 
-        public class EvaluationResult
+        public void Finish()
         {
-            public List<StartPipe.OpenPipeResult> OpenEnds { get; set; }
-            public List<EndPipe> MissingEnds { get; set; }
+            StatsTitle.text += " - Finished";
+            _evaluated = true;
         }
 
         public EvaluationResult Evaluate()
@@ -87,6 +101,7 @@ namespace Flood
                         res.AddRange(list);
                         return res;
                     }),
+                ReminingTime = _clock.RemainingTime
             };
         }
     }
