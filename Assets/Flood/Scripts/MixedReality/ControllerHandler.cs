@@ -1,18 +1,12 @@
-﻿using UnityEngine;
-
-namespace Flood
+﻿namespace Flood.MixedReality
 {
     using System;
     using System.Linq;
-    using System.Runtime.InteropServices;
-
-    using Flood.Utils;
 
     using HoloToolkit.Unity;
 
+    using UnityEngine;
     using UnityEngine.XR;
-
-    using UnityGLTF;
 
     public class ControllerHandler : SingleInstance<ControllerHandler>
     {

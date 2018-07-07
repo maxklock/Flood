@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
 
-using Flood;
+namespace Flood.Assembly
+{
+    public class AssemblyKillPlane : MonoBehaviour {
 
-using UnityEngine;
-
-public class AssemblyKillPlane : MonoBehaviour {
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.GetComponent<PlaceableObject>()!=null)
+        void OnCollisionEnter(Collision collision)
         {
-            GameObject.Destroy(collision.gameObject);
+            if (collision.gameObject.GetComponent<PlaceableObject>()!=null)
+            {
+                GameObject.Destroy(collision.gameObject);
+            }
         }
     }
 }
