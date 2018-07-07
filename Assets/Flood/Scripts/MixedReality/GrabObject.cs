@@ -44,6 +44,7 @@ namespace Flood
                         _grabbedObject = hit.transform.gameObject.GetComponent<PlaceableObject>();
                         if (_grabbedObject == null || !_grabbedObject.CanBeTaken)
                         {
+                            _grabbedObject = null;
                             return;
                         }
                         _grabbedObject.Take();
@@ -63,6 +64,7 @@ namespace Flood
                 _grabbedObject.transform.rotation = right.transform.rotation * Quaternion.Euler(_localRotation);
                 return;
             }
+
             if (_grabbedObject != null)
             {
                 var placeable = GridManager.Instance.SetCellTry(_grabbedObject, _grabbedObject.transform.position, GridPositionState.REAL_WORLD);
