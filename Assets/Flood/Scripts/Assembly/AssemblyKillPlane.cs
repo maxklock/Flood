@@ -9,9 +9,9 @@ public class AssemblyKillPlane : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.other.GetComponent<PlaceableObject>()!=null)
+        if (collision.gameObject.GetComponent<PlaceableObject>()!=null)
         {
-            GameObject.Destroy(collision.other.gameObject);
+            GameObject.Destroy(collision.gameObject);
         }
     }
 }

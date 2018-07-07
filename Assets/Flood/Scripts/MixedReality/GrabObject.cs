@@ -12,10 +12,14 @@ namespace Flood
         public float GrabDistance = 0.3f;
         public float GrabOffset = 0.2f;
         public float CarryDistance = 0.4f;
+        public Material GhostMaterial;
+        public Material PlacedMaterial;
+
+        public bool ShowGhost;
+
         private PlaceableObject _grabbedObject;
+        private GameObject _ghost;
         private float _grabbedDistance;
-
-
         private Vector3 _localRotation;
 
         // Use this for initialization
@@ -50,6 +54,14 @@ namespace Flood
                         _grabbedObject.Take();
                         _grabbedDistance = _grabbedObject.transform.localScale.x / 2 + GrabOffset + CarryDistance; // hit.distance;
                         _localRotation = Vector3.zero;
+
+                        if (ShowGhost)
+                        {
+                            _ghost = new GameObject("ghost");
+                            _ghost.transform.localScale = _grabbedObject.transform.localScale;
+                            Instantiate(_grabbedObject.GetComponentInChildren<MeshCollider>().gameObject, _ghost.transform);
+                            _ghost.GetComponentInChildren<Renderer>().material = GhostMaterial;
+                        }
                     }
                     else
                     {
@@ -62,16 +74,24 @@ namespace Flood
 
                 _grabbedObject.transform.position = ray.origin + ray.direction * (_grabbedDistance);
                 _grabbedObject.transform.rotation = right.transform.rotation * Quaternion.Euler(_localRotation);
+
+                if (_ghost == null)
+                    return;
+                _ghost.transform.position = _grabbedObject.transform.position;
+                _ghost.transform.rotation = _grabbedObject.transform.rotation;
+                GridManager.Instance.ApplyGridTransform(_ghost, GridManager.Instance.WorldToGrid(_ghost.transform.position));
                 return;
             }
 
             if (_grabbedObject != null)
             {
-                var placeable = GridManager.Instance.SetCellTry(_grabbedObject, _grabbedObject.transform.position, GridPositionState.REAL_WORLD);
+                var placeable = GridManager.Instance.SetCellTry(_grabbedObject.gameObject, _grabbedObject.transform.position, GridPositionState.REAL_WORLD);
                 _grabbedObject.GetComponent<Pipe>()?.UpdateEnds(_grabbedObject.transform.eulerAngles);
                 var neighbors = CanBePlaced(_grabbedObject);
-                _grabbedObject.Drop(placeable && neighbors);
+                _grabbedObject.Drop(placeable && neighbors, PlacedMaterial);
             }
+            if (_ghost != null)
+                Destroy(_ghost);
             _grabbedObject = null;
             _grabbedDistance = 0;
         }

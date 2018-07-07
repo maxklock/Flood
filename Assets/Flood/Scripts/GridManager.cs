@@ -16,11 +16,11 @@
         public Vector3 WorldOffset => GridOffset * GridScale;
         public float GridScale = 0.25f;
 
-        private PlaceableObject[,,] _mainGrid;
+        private GameObject[,,] _mainGrid;
 
         // Use this for initialization
         void Awake () {
-            _mainGrid = new PlaceableObject[(int)GridDimensions.x, (int)GridDimensions.y, (int)GridDimensions.z];
+            _mainGrid = new GameObject[(int)GridDimensions.x, (int)GridDimensions.y, (int)GridDimensions.z];
 
         }
 	
@@ -34,7 +34,7 @@
             return GetCell(gridPosition, state) == null;
         }
 
-        public PlaceableObject GetCell(Vector3 gridPosition, GridPositionState state)
+        public GameObject GetCell(Vector3 gridPosition, GridPositionState state)
         {
             var coords = gridPosition;
             if (state == GridPositionState.REAL_WORLD)
@@ -70,7 +70,7 @@
             return x || y || z;
         }
     
-        public void SetCell(PlaceableObject obj, Vector3 gridPosition, GridPositionState state)
+        public void SetCell(GameObject obj, Vector3 gridPosition, GridPositionState state)
         {
             var coords = gridPosition;
             if (state == GridPositionState.REAL_WORLD)
@@ -82,7 +82,7 @@
             ApplyGridTransform(obj, coords);
         }
 
-        private void ApplyGridTransform(PlaceableObject obj, Vector3 coords)
+        public void ApplyGridTransform(GameObject obj, Vector3 coords)
         {
             obj.transform.position = GridToWorld(coords);
             obj.transform.rotation = Quaternion.Euler(ClampToAxis(obj.transform.eulerAngles));
@@ -99,7 +99,7 @@
             return (new Vector3((int)coords.x, (int)coords.y, (int)coords.z) * GridScale) + WorldOffset + Vector3.one * (GridScale / 2);
         }
 
-        public bool SetCellTry(PlaceableObject obj, Vector3 gridPosition, GridPositionState state)
+        public bool SetCellTry(GameObject obj, Vector3 gridPosition, GridPositionState state)
         {
             var coords = gridPosition;
             if (state == GridPositionState.REAL_WORLD)

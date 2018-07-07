@@ -20,7 +20,7 @@ namespace Flood
         // Use this for initialization
         private void Start()
         {
-            GridManager.Instance.SetCell(GetComponent<PlaceableObject>(), transform.position, GridPositionState.REAL_WORLD);
+            GridManager.Instance.SetCell(gameObject, transform.position, GridPositionState.REAL_WORLD);
         }
 
         // Update is called once per frame
