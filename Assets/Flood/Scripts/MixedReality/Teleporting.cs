@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-
-namespace Flood
+﻿namespace Flood.MixedReality
 {
     using Flood.Utils;
 
     using HoloToolkit.Unity;
+
+    using UnityEngine;
 
     public class Teleporting : MonoBehaviour
     {

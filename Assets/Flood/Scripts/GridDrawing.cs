@@ -1,72 +1,70 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
 
-using Flood;
-
-using UnityEngine;
-
-[RequireComponent(typeof(GridManager))]
-public class GridDrawing : MonoBehaviour
+namespace Flood
 {
-
-    private GridManager _gridManager;
-    public GameObject LineRendererPrefab;
-
-	// Use this for initialization
-	void Start ()
-	{
-	    _gridManager = GetComponent<GridManager>();
-        CreateLineRenderer();
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    private void CreateLineRenderer()
+    [RequireComponent(typeof(GridManager))]
+    public class GridDrawing : MonoBehaviour
     {
-        //Build XY Layers
-        for (int z = 0; z <= _gridManager.GridDimensions.z; z++)
+
+        private GridManager _gridManager;
+        public GameObject LineRendererPrefab;
+
+        // Use this for initialization
+        void Start ()
         {
-            //Build X Layer
-            for (int x = 0; x <= _gridManager.GridDimensions.x; x++)
-            {
+            _gridManager = GetComponent<GridManager>();
+            CreateLineRenderer();
 
-                var lR = GameObject.Instantiate(LineRendererPrefab);
-                lR.transform.parent = this.transform;
-                var lRS = lR.GetComponent<LineRenderer>();
-                lRS.positionCount = 2;
-                lRS.SetPosition(0, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, 0, z * _gridManager.GridScale));
-                lRS.SetPosition(1, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, _gridManager.GridDimensions.y * _gridManager.GridScale, z * _gridManager.GridScale));
-
-            }
-            for (int y = 0; y <= _gridManager.GridDimensions.y; y++)
-            {
-                var lR = GameObject.Instantiate(LineRendererPrefab);
-                lR.transform.parent = this.transform;
-                var lRS = lR.GetComponent<LineRenderer>();
-                lRS.positionCount = 2;
-                lRS.SetPosition(0, _gridManager.WorldOffset + new Vector3(0, y * _gridManager.GridScale, z * _gridManager.GridScale));
-                lRS.SetPosition(1, _gridManager.WorldOffset + new Vector3(_gridManager.GridDimensions.x * _gridManager.GridScale, y * _gridManager.GridScale, z * _gridManager.GridScale));
-
-            }
+        }
+	
+        // Update is called once per frame
+        void Update () {
+		
         }
 
-
-        for (int x = 0; x <= _gridManager.GridDimensions.x; x++)
+        private void CreateLineRenderer()
         {
-            for (int y = 0; y <= _gridManager.GridDimensions.y; y++)
+            //Build XY Layers
+            for (int z = 0; z <= _gridManager.GridDimensions.z; z++)
             {
-                var lR = GameObject.Instantiate(LineRendererPrefab);
-                lR.transform.parent = this.transform;
-                var lRS = lR.GetComponent<LineRenderer>();
-                lRS.positionCount = 2;
-                lRS.SetPosition(0, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, y * _gridManager.GridScale, 0));
-                lRS.SetPosition(1, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, y * _gridManager.GridScale, _gridManager.GridDimensions.z * _gridManager.GridScale));
+                //Build X Layer
+                for (int x = 0; x <= _gridManager.GridDimensions.x; x++)
+                {
+
+                    var lR = GameObject.Instantiate(LineRendererPrefab);
+                    lR.transform.parent = this.transform;
+                    var lRS = lR.GetComponent<LineRenderer>();
+                    lRS.positionCount = 2;
+                    lRS.SetPosition(0, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, 0, z * _gridManager.GridScale));
+                    lRS.SetPosition(1, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, _gridManager.GridDimensions.y * _gridManager.GridScale, z * _gridManager.GridScale));
+
+                }
+                for (int y = 0; y <= _gridManager.GridDimensions.y; y++)
+                {
+                    var lR = GameObject.Instantiate(LineRendererPrefab);
+                    lR.transform.parent = this.transform;
+                    var lRS = lR.GetComponent<LineRenderer>();
+                    lRS.positionCount = 2;
+                    lRS.SetPosition(0, _gridManager.WorldOffset + new Vector3(0, y * _gridManager.GridScale, z * _gridManager.GridScale));
+                    lRS.SetPosition(1, _gridManager.WorldOffset + new Vector3(_gridManager.GridDimensions.x * _gridManager.GridScale, y * _gridManager.GridScale, z * _gridManager.GridScale));
+
+                }
             }
 
+
+            for (int x = 0; x <= _gridManager.GridDimensions.x; x++)
+            {
+                for (int y = 0; y <= _gridManager.GridDimensions.y; y++)
+                {
+                    var lR = GameObject.Instantiate(LineRendererPrefab);
+                    lR.transform.parent = this.transform;
+                    var lRS = lR.GetComponent<LineRenderer>();
+                    lRS.positionCount = 2;
+                    lRS.SetPosition(0, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, y * _gridManager.GridScale, 0));
+                    lRS.SetPosition(1, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, y * _gridManager.GridScale, _gridManager.GridDimensions.z * _gridManager.GridScale));
+                }
+
+            }
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using System.Linq;
-
-using Flood.Utils;
-
-using UnityEngine;
-
-namespace Flood
+﻿namespace Flood.MixedReality
 {
+    using System.Linq;
+
+    using Flood.Utils;
+
+    using UnityEngine;
+
     public class GrabObject : MonoBehaviour
     {
 
