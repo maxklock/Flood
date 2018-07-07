@@ -607,6 +607,8 @@ GameObject:
   m_Component:
   - component: {fileID: 816807829}
   - component: {fileID: 816807828}
+  - component: {fileID: 816807831}
+  - component: {fileID: 816807830}
   m_Layer: 0
   m_Name: ControllerHandler
   m_TagString: Untagged
@@ -626,10 +628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MRCameraParent: {fileID: 725115646}
-  TeleportMarker: {fileID: 1617634163}
-  GrabDistance: 0.3
-  GrabOffset: 0.2
-  CarryDistance: 0.1
+  LeftController: {fileID: 0}
+  RightController: {fileID: 0}
 --- !u!4 &816807829
 Transform:
   m_ObjectHideFlags: 0
@@ -644,6 +644,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &816807830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 816807827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce3870375f113d44ab96f57d18dce18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TeleportMarker: {fileID: 1617634163}
+--- !u!114 &816807831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 816807827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c81c17ee17db743a592a10cb5bd2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GrabDistance: 0.3
+  GrabOffset: 0.2
+  CarryDistance: 0.1
 --- !u!1 &953704739
 GameObject:
   m_ObjectHideFlags: 0
