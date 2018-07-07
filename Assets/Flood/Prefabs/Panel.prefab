@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 33812521682921306}
   - component: {fileID: 23080118554904128}
   - component: {fileID: 136134062698831856}
+  - component: {fileID: 114149496514389150}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -259,6 +260,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1135766406524474}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114149496514389150
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1135766406524474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d46084e4ccf9bf49a3468c8dde2dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonDeep: 0.01
+  OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!136 &136134062698831856
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -57,6 +57,11 @@ namespace Flood
             {
                 Finish();
             }
+            DrawText();
+        }
+
+        private void DrawText()
+        {
             var space = new String('\t', TabSpace);
             var strBuilder = new StringBuilder();
             strBuilder.AppendLine($"{PrefixConnected}{space}{Connected}");
@@ -79,8 +84,11 @@ namespace Flood
 
         public void Finish()
         {
-            StatsTitle.text += " - Finished";
+            StatsTitle.text = "Finished";
+            Points += (int)_clock.RemainingTime;
             _evaluated = true;
+
+            DrawText();
         }
 
         public EvaluationResult Evaluate()
