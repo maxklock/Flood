@@ -7,13 +7,6 @@
 
         public bool CanBeTaken = true;
 
-        private Color _startColor;
-
-        private void Start()
-        {
-            _startColor = GetComponentInChildren<Renderer>().material.color;
-        }
-
         public bool Take()
         {
             if (!CanBeTaken)
@@ -23,29 +16,40 @@
 
             GetComponentInChildren<Rigidbody>().isKinematic = true;
             GetComponent<PipeOnAssemblyLine>().enabled = false;
-            GetComponentInChildren<Renderer>().material.color = Color.green;
 
 
             return true;
         }
 
-        public void Drop(bool placeable)
+        private void Update()
         {
-            if (!OneTimeDrop)
+            if (CanBeTaken)
             {
-                GetComponentInChildren<Renderer>().material.color = _startColor;
                 return;
             }
 
-            GetComponentInChildren<Renderer>().material.color = Color.red;
+            if (transform.position.y < 0.15f)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public void Drop(bool placeable, Material material)
+        {
+            if (!OneTimeDrop)
+            {
+                return;
+            }
+
+            CanBeTaken = false;
+
             if (placeable)
             {
-                CanBeTaken = false;
+                GetComponentInChildren<Renderer>().material = material;
             }
             else
             {
-                GetComponentInChildren<Renderer>().material.color = Color.blue;
-                Destroy(gameObject);
+                GetComponentInChildren<Rigidbody>().isKinematic = false;
             }
         }
 
