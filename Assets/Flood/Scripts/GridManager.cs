@@ -8,7 +8,7 @@
 
     using UnityEngine;
 
-    public class GridManager : Singleton<GridManager>
+    public class GridManager : SingleInstance<GridManager>
     {
         public Vector3 GridDimensions = new Vector3(50,50,50);
 
