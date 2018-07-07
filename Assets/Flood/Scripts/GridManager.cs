@@ -99,6 +99,24 @@
             return (new Vector3((int)coords.x, (int)coords.y, (int)coords.z) * GridScale) + WorldOffset + Vector3.one * (GridScale / 2);
         }
 
+        public void SetCellByCollider(GameObject obj, params Collider[] colliders)
+        {
+            for (var x = 0; x <= GridDimensions.x; x++)
+            {
+                for (var y = 0; y <= GridDimensions.y; y++)
+                {
+                    for (var z = 0; z <= GridDimensions.z; z++)
+                    {
+                        var point = GridToWorld(new Vector3(x, y, z));
+                        if (colliders.Any(c => c.bounds.Contains(point)))
+                        {
+                            _mainGrid[x, y, z] = obj;
+                        }
+                    }
+                }
+            }
+        }
+
         public bool SetCellTry(GameObject obj, Vector3 gridPosition, GridPositionState state)
         {
             var coords = gridPosition;
