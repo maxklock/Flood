@@ -2,6 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     using HoloToolkit.Unity;
 
@@ -30,60 +31,63 @@
 
         public bool IsCellFree(Vector3 gridPosition, GridPositionState state)
         {
-            if (state == GridPositionState.GRID_CELL)
-                return (_mainGrid[(int)gridPosition.x, (int)gridPosition.y, (int)gridPosition.z] == null);
-            else
-                return (_mainGrid[(int) (gridPosition.x/GridScale), (int)(gridPosition.y / GridScale), (int)(gridPosition.z / GridScale)] == null);
+            return GetCell(gridPosition, state) == null;
         }
 
         public PlaceableObject GetCell(Vector3 gridPosition, GridPositionState state)
         {
-            if (state == GridPositionState.GRID_CELL)
-                return (_mainGrid[(int)gridPosition.x, (int)gridPosition.y, (int)gridPosition.z]);
-            else
-                return (_mainGrid[(int)(gridPosition.x / GridScale), (int)(gridPosition.y / GridScale), (int)(gridPosition.z / GridScale)]);
+            var coords = gridPosition;
+            if (state == GridPositionState.REAL_WORLD)
+            {
+                coords = (gridPosition - WorldOffset) / GridScale;
+            }
+
+            return (_mainGrid[(int)coords.x, (int)coords.y, (int)coords.z]);
         }
 
-        public void SetCell(PlaceableObject obj)
+        private static Vector3 ClampToAxis(Vector3 euler)
         {
-            var coords = (obj.transform.position - WorldOffset) / GridScale;
-            _mainGrid[(int)(coords.x), (int)(coords.y), (int)(coords.z)] = obj;
-            obj.transform.position = (new Vector3((int)coords.x, (int)coords.y, (int)coords.z) * GridScale) + WorldOffset + Vector3.one * (GridScale / 2);
-            obj.transform.rotation = Quaternion.identity; // ToDo FixMe
+            var vec = Vector3.zero;
+            vec.x = Mathf.Round(euler.x / 90) * 90;
+            vec.y = Mathf.Round(euler.y / 90) * 90;
+            vec.z = Mathf.Round(euler.z / 90) * 90;
+            return vec;
         }
 
         public void SetCell(PlaceableObject obj, Vector3 gridPosition, GridPositionState state)
         {
-            if (state == GridPositionState.GRID_CELL)
-                _mainGrid[(int)gridPosition.x, (int)gridPosition.y, (int)gridPosition.z] = obj;
-            else
+            var coords = gridPosition;
+            if (state == GridPositionState.REAL_WORLD)
             {
-                var coords = gridPosition / GridScale;
-                _mainGrid[(int)(coords.x), (int)(coords.y), (int)(coords.z)] = obj;
+                coords = (gridPosition - WorldOffset) / GridScale;
             }
+
+            _mainGrid[(int)(coords.x), (int)(coords.y), (int)(coords.z)] = obj;
+            ApplyGridTransform(obj, coords);
+        }
+
+        private void ApplyGridTransform(PlaceableObject obj, Vector3 coords)
+        {
+            obj.transform.position = (new Vector3((int)coords.x, (int)coords.y, (int)coords.z) * GridScale) + WorldOffset + Vector3.one * (GridScale / 2);
+            obj.transform.rotation = Quaternion.Euler(ClampToAxis(obj.transform.eulerAngles));
         }
 
         public bool SetCellTry(PlaceableObject obj, Vector3 gridPosition, GridPositionState state)
         {
-            if (state == GridPositionState.GRID_CELL)
+            var coords = gridPosition;
+            if (state == GridPositionState.REAL_WORLD)
             {
-                if (IsCellFree(gridPosition, state))
-                {
-                    _mainGrid[(int)gridPosition.x, (int)gridPosition.y, (int)gridPosition.z] = obj;
-                    return true;
-                }
-                else return false;
+                coords = (gridPosition - WorldOffset) / GridScale;
+            }
 
-            }
-            else
+            if (!IsCellFree(gridPosition, state))
             {
-                if (IsCellFree(gridPosition, state))
-                {
-                    _mainGrid[(int)(gridPosition.x / GridScale), (int)(gridPosition.y / GridScale), (int)(gridPosition.z / GridScale)] = obj;
-                    return true;
-                }
-                else  return false;
+                return false;
             }
+
+            _mainGrid[(int)coords.x, (int)coords.y, (int)coords.z] = obj;
+            ApplyGridTransform(obj, coords);
+            return true;
         }
 
 

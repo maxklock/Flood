@@ -12,15 +12,22 @@ namespace Flood
 
     public class ControllerHandler : MonoBehaviour
     {
+        public GameObject MRCameraParent;
+
+        public GameObject TeleportMarker;
+
+        public float GrabDistance = 0.3f;
+        public float GrabOffset = 0.2f;
+        public float CarryDistance = 0.4f;
+
         private GameObject _left;
         private GameObject _right;
 
         private PlaceableObject _grabbedObject;
         private float _grabbedDistance;
 
-        public GameObject MRCameraParent;
 
-        public GameObject TeleportMarker;
+        private Vector3 _localRotation;
 
         private static readonly Quaternion HandRotationOffset = Quaternion.Euler(34.054f, -15.144f, -8.618f);
 
@@ -53,7 +60,7 @@ namespace Flood
                 MRCameraParent.transform.position = TeleportMarker.transform.position - camOffset;
                 return;
             }
-            if (AxisToButtonUtil.Instance.IsPressed("CONTROLLER_RIGHT_STICK_VERTICAL"))
+            if (_grabbedObject == null && AxisToButtonUtil.Instance.IsPressed("CONTROLLER_RIGHT_STICK_VERTICAL"))
             {
                 TeleportMarker.SetActive(true);
 
@@ -73,7 +80,7 @@ namespace Flood
 
             if (AxisToButtonUtil.Instance.IsPressed("CONTROLLER_RIGHT_TRIGGER"))
             {
-                var ray = new Ray(_right.transform.position - _right.transform.forward * 0.2f, _right.transform.forward);
+                var ray = new Ray(_right.transform.position - _right.transform.forward * GrabOffset, _right.transform.forward);
                 if (_grabbedDistance < 0)
                 {
                     return;
@@ -81,11 +88,17 @@ namespace Flood
                 if (_grabbedObject == null)
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 0.5f))
+                    if (Physics.Raycast(ray, out hit, GrabDistance + GrabOffset))
                     {
                         Debug.Log("grab: " + hit.transform.gameObject.name);
                         _grabbedObject = hit.transform.gameObject.GetComponent<PlaceableObject>();
-                        _grabbedDistance = Vector3.Distance(ray.origin, _grabbedObject.transform.position);
+                        if (_grabbedObject == null)
+                        {
+                            return;
+                        }
+                        _grabbedObject.Take();
+                        _grabbedDistance = _grabbedObject.transform.localScale.x / 2 + GrabOffset + CarryDistance; // hit.distance;
+                        _localRotation = Vector3.zero;
                     }
                     else
                     {
@@ -93,16 +106,19 @@ namespace Flood
                     }
                     return;
                 }
-                _grabbedObject.transform.position = ray.origin + ray.direction * _grabbedDistance;
-                _grabbedObject.transform.rotation = _right.transform.rotation;
-                //_grabbedObject.transform.Rotate(Vector3.up, Input.GetAxis("CONTROLLER_RIGHT_STICK_HORIZONTAL") * 10, Space.Self);
-                //_grabbedObject.transform.Rotate(Vector3.left, Input.GetAxis("CONTROLLER_RIGHT_STICK_VERTICAL") * 10, Space.Self);
+
+                _localRotation += 10 * new Vector3(Input.GetAxis("CONTROLLER_RIGHT_STICK_VERTICAL"), Input.GetAxis("CONTROLLER_RIGHT_STICK_HORIZONTAL"), 0);
+
+                _grabbedObject.transform.position = ray.origin + ray.direction * (_grabbedDistance);
+                _grabbedObject.transform.rotation = _right.transform.rotation * Quaternion.Euler(_localRotation);
                 return;
             }
             if (_grabbedObject != null)
             {
-                Debug.Log("Set Object: " + _grabbedObject.transform.position);
-                GridManager.Instance.SetCell(_grabbedObject);
+                if (GridManager.Instance.SetCellTry(_grabbedObject, _grabbedObject.transform.position, GridPositionState.REAL_WORLD))
+                {
+                    _grabbedObject.Drop();
+                }
             }
             _grabbedObject = null;
             _grabbedDistance = 0;
