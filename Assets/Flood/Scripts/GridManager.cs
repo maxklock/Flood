@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using Assets.Flood.Scripts;
 
+using UnityEditor.Animations;
+
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -12,6 +14,7 @@ public class GridManager : MonoBehaviour
 
     private PlaceableObject[,,] _mainGrid;
 
+
 	// Use this for initialization
 	void Start () {
 	    _mainGrid = new PlaceableObject[(int)GridDimensions.x, (int)GridDimensions.y, (int)GridDimensions.z];
@@ -20,7 +23,7 @@ public class GridManager : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
     public bool IsCellFree(Vector3 gridPosition, GridPositionState state)
