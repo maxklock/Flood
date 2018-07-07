@@ -26,13 +26,14 @@ namespace Flood
 
         private bool _evaluated;
 
-        private const string PrefixConnected = "Connected Pipes:\t\t";
-        private const string PrefixDropped = "Dropped Pipes:\t\t";
-        private const string PrefixPoints = "Points:\t\t\t\t\t\t";
-        private const string PrefixOpenPipes = "Open Pipes:\t\t\t\t";
-        private const string PrefixMissingsEnds = "Missing Ends:\t\t\t";
+        public int TabSpace = 2;
 
-        private const string Space = "\t\t\t\t";
+        private const string PrefixConnected = "Connected Pipes\t";
+        private const string PrefixDropped = "Dropped Pipes\t";
+        private const string PrefixPoints = "Points\t\t\t";
+        private const string PrefixOpenPipes = "Open Pipes\t\t";
+        private const string PrefixMissingsEnds = "Missing Ends\t";
+
 
         // Use this for initialization
         void Start()
@@ -56,14 +57,14 @@ namespace Flood
             {
                 Finish();
             }
-
+            var space = new String('\t', TabSpace);
             var strBuilder = new StringBuilder();
-            strBuilder.AppendLine($"{PrefixConnected}{Space}{Connected}");
-            strBuilder.AppendLine($"{PrefixDropped}{Space}{Dropped}");
-            strBuilder.AppendLine($"{PrefixPoints}{Space}{Points}");
+            strBuilder.AppendLine($"{PrefixConnected}{space}{Connected}");
+            strBuilder.AppendLine($"{PrefixDropped}{space}{Dropped}");
+            strBuilder.AppendLine($"{PrefixPoints}{space}{Points}");
             strBuilder.AppendLine();
-            strBuilder.AppendLine($"{PrefixOpenPipes}{Space}{_result.OpenEnds.Count}");
-            strBuilder.AppendLine($"{PrefixMissingsEnds}{Space}{_result.MissingEnds.Count}");
+            strBuilder.AppendLine($"{PrefixOpenPipes}{space}{_result.OpenEnds.Count}");
+            strBuilder.AppendLine($"{PrefixMissingsEnds}{space}{_result.MissingEnds.Count}");
             StatsText.text = strBuilder.ToString();
         }
         
