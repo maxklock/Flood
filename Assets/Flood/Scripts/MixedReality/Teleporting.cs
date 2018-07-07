@@ -4,6 +4,8 @@ namespace Flood
 {
     using Flood.Utils;
 
+    using HoloToolkit.Unity;
+
     public class Teleporting : MonoBehaviour
     {
 
@@ -31,7 +33,7 @@ namespace Flood
 
                 RaycastHit hit;
                 var ray = new Ray(right.transform.position, right.transform.forward);
-                if (Physics.Raycast(ray, out hit, 10, LayerMask.GetMask("Floor")))
+                if (Physics.Raycast(ray, out hit, 10) && hit.transform.gameObject.IsInLayerMask(LayerMask.GetMask("Floor")))
                 {
                     TeleportMarker.transform.position = hit.point;
                 }
