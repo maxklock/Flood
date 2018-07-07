@@ -1,6 +1,8 @@
-﻿namespace Assets.Flood.Scripts
+﻿namespace Flood
 {
-    public interface PlaceableObject {
+    using UnityEngine;
+    public class PlaceableObject : MonoBehaviour
+    {
 
 
     }

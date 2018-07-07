@@ -22,7 +22,7 @@
             var isPressed = IsPressed(axis);
             if (!_pressedValues.ContainsKey(axis))
             {
-                _pressedValues.Add(axis, false);
+                _pressedValues.Add(axis, isPressed);
             }
             var oldValue = _pressedValues[axis];
 
@@ -36,7 +36,7 @@
             var isPressed = IsPressed(axis);
             if (!_pressedValues.ContainsKey(axis))
             {
-                _pressedValues.Add(axis, false);
+                _pressedValues.Add(axis, isPressed);
             }
             var oldValue = _pressedValues[axis];
 

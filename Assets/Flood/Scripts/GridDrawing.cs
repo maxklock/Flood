@@ -1,5 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
+using Flood;
+
 using UnityEngine;
 
 [RequireComponent(typeof(GridManager))]
@@ -35,8 +38,8 @@ public class GridDrawing : MonoBehaviour
                 lR.transform.parent = this.transform;
                 var lRS = lR.GetComponent<LineRenderer>();
                 lRS.positionCount = 2;
-                lRS.SetPosition(0, new Vector3(x * _gridManager.GridScale, 0, z * _gridManager.GridScale));
-                lRS.SetPosition(1, new Vector3(x * _gridManager.GridScale, _gridManager.GridDimensions.y * _gridManager.GridScale, z * _gridManager.GridScale));
+                lRS.SetPosition(0, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, 0, z * _gridManager.GridScale));
+                lRS.SetPosition(1, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, _gridManager.GridDimensions.y * _gridManager.GridScale, z * _gridManager.GridScale));
 
             }
             for (int y = 0; y <= _gridManager.GridDimensions.y; y++)
@@ -45,8 +48,8 @@ public class GridDrawing : MonoBehaviour
                 lR.transform.parent = this.transform;
                 var lRS = lR.GetComponent<LineRenderer>();
                 lRS.positionCount = 2;
-                lRS.SetPosition(0, new Vector3(0, y * _gridManager.GridScale, z * _gridManager.GridScale));
-                lRS.SetPosition(1, new Vector3(_gridManager.GridDimensions.x * _gridManager.GridScale, y * _gridManager.GridScale, z * _gridManager.GridScale));
+                lRS.SetPosition(0, _gridManager.WorldOffset + new Vector3(0, y * _gridManager.GridScale, z * _gridManager.GridScale));
+                lRS.SetPosition(1, _gridManager.WorldOffset + new Vector3(_gridManager.GridDimensions.x * _gridManager.GridScale, y * _gridManager.GridScale, z * _gridManager.GridScale));
 
             }
         }
@@ -60,8 +63,8 @@ public class GridDrawing : MonoBehaviour
                 lR.transform.parent = this.transform;
                 var lRS = lR.GetComponent<LineRenderer>();
                 lRS.positionCount = 2;
-                lRS.SetPosition(0, new Vector3(x * _gridManager.GridScale, y * _gridManager.GridScale, 0));
-                lRS.SetPosition(1, new Vector3(x * _gridManager.GridScale, y * _gridManager.GridScale, _gridManager.GridDimensions.z * _gridManager.GridScale));
+                lRS.SetPosition(0, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, y * _gridManager.GridScale, 0));
+                lRS.SetPosition(1, _gridManager.WorldOffset + new Vector3(x * _gridManager.GridScale, y * _gridManager.GridScale, _gridManager.GridDimensions.z * _gridManager.GridScale));
             }
 
         }

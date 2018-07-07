@@ -15,7 +15,7 @@ namespace Flood
         private GameObject _left;
         private GameObject _right;
 
-        private GameObject _grabbedObject;
+        private PlaceableObject _grabbedObject;
         private float _grabbedDistance;
 
         public GameObject MRCameraParent;
@@ -46,21 +46,26 @@ namespace Flood
             SetControllerTransform(_left.transform, XRNode.LeftHand);
             SetControllerTransform(_right.transform, XRNode.RightHand);
 
-            var ray = new Ray(_right.transform.position, _right.transform.forward);
-
-            if (_grabbedObject == null && AxisToButtonUtil.Instance.IsPressed("CONTROLLER_RIGHT_STICK_VERTICAL"))
+            if (TeleportMarker.activeSelf && AxisToButtonUtil.Instance.IsUp("CONTROLLER_RIGHT_STICK_VERTICAL"))
+            {
+                Debug.Log("stick up: " + TeleportMarker.activeSelf + ", " + TeleportMarker.activeInHierarchy);
+                var camOffset = Vector3.forward * Camera.main.transform.localPosition.z + Vector3.right * Camera.main.transform.localPosition.x;
+                MRCameraParent.transform.position = TeleportMarker.transform.position - camOffset;
+                return;
+            }
+            if (AxisToButtonUtil.Instance.IsPressed("CONTROLLER_RIGHT_STICK_VERTICAL"))
             {
                 TeleportMarker.SetActive(true);
 
                 RaycastHit hit;
+                var ray = new Ray(_right.transform.position, _right.transform.forward);
                 if (Physics.Raycast(ray, out hit, 10, LayerMask.GetMask("Floor")))
                 {
                     TeleportMarker.transform.position = hit.point;
-                    if (AxisToButtonUtil.Instance.IsUp("CONTROLLER_RIGHT_TRIGGER"))
-                    {
-                        var camOffset = Vector3.forward * Camera.main.transform.localPosition.z + Vector3.right * Camera.main.transform.localPosition.x;
-                        MRCameraParent.transform.position = hit.point - camOffset;
-                    }
+                }
+                else
+                {
+                    TeleportMarker.SetActive(false);
                 }
                 return;
             }
@@ -68,6 +73,7 @@ namespace Flood
 
             if (AxisToButtonUtil.Instance.IsPressed("CONTROLLER_RIGHT_TRIGGER"))
             {
+                var ray = new Ray(_right.transform.position - _right.transform.forward * 0.2f, _right.transform.forward);
                 if (_grabbedDistance < 0)
                 {
                     return;
@@ -75,10 +81,10 @@ namespace Flood
                 if (_grabbedObject == null)
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 0.3f))
+                    if (Physics.Raycast(ray, out hit, 0.5f))
                     {
                         Debug.Log("grab: " + hit.transform.gameObject.name);
-                        _grabbedObject = hit.transform.gameObject;
+                        _grabbedObject = hit.transform.gameObject.GetComponent<PlaceableObject>();
                         _grabbedDistance = Vector3.Distance(ray.origin, _grabbedObject.transform.position);
                     }
                     else
@@ -87,12 +93,16 @@ namespace Flood
                     }
                     return;
                 }
-                Debug.Log("move:");
                 _grabbedObject.transform.position = ray.origin + ray.direction * _grabbedDistance;
                 _grabbedObject.transform.rotation = _right.transform.rotation;
                 //_grabbedObject.transform.Rotate(Vector3.up, Input.GetAxis("CONTROLLER_RIGHT_STICK_HORIZONTAL") * 10, Space.Self);
                 //_grabbedObject.transform.Rotate(Vector3.left, Input.GetAxis("CONTROLLER_RIGHT_STICK_VERTICAL") * 10, Space.Self);
                 return;
+            }
+            if (_grabbedObject != null)
+            {
+                Debug.Log("Set Object: " + _grabbedObject.transform.position);
+                GridManager.Instance.SetCell(_grabbedObject);
             }
             _grabbedObject = null;
             _grabbedDistance = 0;
