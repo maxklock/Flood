@@ -19,7 +19,7 @@
         private PlaceableObject[,,] _mainGrid;
 
         // Use this for initialization
-        void Start () {
+        void Awake () {
             _mainGrid = new PlaceableObject[(int)GridDimensions.x, (int)GridDimensions.y, (int)GridDimensions.z];
 
         }
@@ -39,7 +39,12 @@
             var coords = gridPosition;
             if (state == GridPositionState.REAL_WORLD)
             {
-                coords = (gridPosition - WorldOffset) / GridScale;
+                coords = WorldToGrid(gridPosition);
+            }
+
+            if (IsOutOfRange(coords))
+            {
+                return null;
             }
 
             return (_mainGrid[(int)coords.x, (int)coords.y, (int)coords.z]);
@@ -54,12 +59,23 @@
             return vec;
         }
 
+        private bool IsOutOfRange(Vector3 coords)
+        {
+            var ints = new Vector3Int((int)coords.x, (int)coords.y, (int)coords.z);
+        
+            var x = ints.x < 0 || ints.x >= _mainGrid.GetLength(0);
+            var y = ints.y < 0 || ints.y >= _mainGrid.GetLength(1);
+            var z = ints.z < 0 || ints.z >= _mainGrid.GetLength(2);
+
+            return x || y || z;
+        }
+    
         public void SetCell(PlaceableObject obj, Vector3 gridPosition, GridPositionState state)
         {
             var coords = gridPosition;
             if (state == GridPositionState.REAL_WORLD)
             {
-                coords = (gridPosition - WorldOffset) / GridScale;
+                coords = WorldToGrid(gridPosition);
             }
 
             _mainGrid[(int)(coords.x), (int)(coords.y), (int)(coords.z)] = obj;
@@ -68,8 +84,19 @@
 
         private void ApplyGridTransform(PlaceableObject obj, Vector3 coords)
         {
-            obj.transform.position = (new Vector3((int)coords.x, (int)coords.y, (int)coords.z) * GridScale) + WorldOffset + Vector3.one * (GridScale / 2);
+            obj.transform.position = GridToWorld(coords);
             obj.transform.rotation = Quaternion.Euler(ClampToAxis(obj.transform.eulerAngles));
+        }
+
+        public Vector3 WorldToGrid(Vector3 pos)
+        {
+            var tmp = (pos - WorldOffset) / GridScale;
+            return new Vector3((int)tmp.x, (int)tmp.y, (int)tmp.z);
+        }
+
+        public Vector3 GridToWorld(Vector3 coords)
+        {
+            return (new Vector3((int)coords.x, (int)coords.y, (int)coords.z) * GridScale) + WorldOffset + Vector3.one * (GridScale / 2);
         }
 
         public bool SetCellTry(PlaceableObject obj, Vector3 gridPosition, GridPositionState state)
@@ -77,7 +104,12 @@
             var coords = gridPosition;
             if (state == GridPositionState.REAL_WORLD)
             {
-                coords = (gridPosition - WorldOffset) / GridScale;
+                coords = WorldToGrid(gridPosition);
+            }
+
+            if (IsOutOfRange(coords))
+            {
+                return false;
             }
 
             if (!IsCellFree(gridPosition, state))

@@ -35,3 +35,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Assembly-CSharp.csproj.DotSettings
+Assembly-CSharp-Editor.csproj.DotSettings

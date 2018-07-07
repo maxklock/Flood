@@ -5,6 +5,8 @@
     {
         public bool OneTimeDrop = true;
 
+        public bool CanBeTaken = true;
+
         private Color _startColor;
 
         private void Start()
@@ -12,12 +14,17 @@
             _startColor = GetComponentInChildren<Renderer>().material.color;
         }
 
-        public void Take()
+        public bool Take()
         {
+            if (!CanBeTaken)
+            {
+                return false;
+            }
             GetComponentInChildren<Renderer>().material.color = Color.green;
+            return true;
         }
 
-        public void Drop()
+        public void Drop(bool placeable)
         {
             if (!OneTimeDrop)
             {
@@ -26,7 +33,15 @@
             }
 
             GetComponentInChildren<Renderer>().material.color = Color.red;
-            Destroy(this);
+            if (placeable)
+            {
+                CanBeTaken = false;
+            }
+            else
+            {
+                GetComponentInChildren<Renderer>().material.color = Color.blue;
+                Destroy(gameObject);
+            }
         }
 
     }
