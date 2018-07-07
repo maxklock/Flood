@@ -11,6 +11,14 @@ namespace Flood
     [RequireComponent(typeof(PlaceableObject))]
     public class StartPipe : Pipe
     {
+        public EndPipe[] EndPipes;
+
+        public class EvaluationResult
+        {
+            public List<OpenPipeResult> OpenPipes { get; set; }
+            public List<EndPipe> EndPipes { get; set; }
+        }
+
         public class OpenPipeResult
         {
             public Pipe Pipe { get; set; }
@@ -28,10 +36,14 @@ namespace Flood
         {
             if (AxisToButtonUtil.Instance.IsDown("XBOX_RIGHT_BUMPER"))
             {
-                var openEnds = EvaluatePipes();
-                foreach (var ends in openEnds)
+                var result = EvaluatePipes();
+                foreach (var ends in result.OpenPipes)
                 {
                     ends.Pipe.GetComponentInChildren<Renderer>().material.color = Color.yellow;
+                }
+                foreach (var ends in EndPipes.Where(p => !result.EndPipes.Contains(p)))
+                {
+                    ends.GetComponentInChildren<Renderer>().material.color = Color.yellow;
                 }
             }
         }
@@ -57,11 +69,12 @@ namespace Flood
             }
         }
 
-        private IEnumerable<OpenPipeResult> EvaluatePipes()
+        private EvaluationResult EvaluatePipes()
         {
             var pipesProcess = new Queue<Pipe>();
             var pipesDone = new List<Pipe>();
             var pipesOpen = new List<OpenPipeResult>();
+            var pipesEnds = new List<EndPipe>();
 
             pipesProcess.Enqueue(this);
 
@@ -87,12 +100,23 @@ namespace Flood
 
                     if (pipesDone.Contains(pipe))
                         continue;
+
+                    var endPipe = pipe as EndPipe;
+                    if (endPipe != null)
+                    {
+                        pipesEnds.Add(endPipe);
+                        continue;
+                    }
                     pipesProcess.Enqueue(pipe);
                 }
                 
             }
 
-            return pipesOpen;
+            return new EvaluationResult
+            {
+                OpenPipes = pipesOpen,
+                EndPipes = pipesEnds
+            };
         }
     }
 }

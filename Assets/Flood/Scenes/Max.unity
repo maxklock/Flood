@@ -307,6 +307,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &440951466 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114025765429000948, guid: 89948db02f49cd441a063ab86b7b686c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1565298676}
+  m_Script: {fileID: 11500000, guid: 47539edc7d872db478642b9e0d28c40c, type: 3}
 --- !u!1001 &555302404
 Prefab:
   m_ObjectHideFlags: 0
@@ -314,6 +320,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114674524859188344, guid: dc7ce86838a062347b84fe4e7f87ca43,
+        type: 2}
+      propertyPath: Ends.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114674524859188344, guid: dc7ce86838a062347b84fe4e7f87ca43,
+        type: 2}
+      propertyPath: EndPipes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4213314208398742, guid: dc7ce86838a062347b84fe4e7f87ca43, type: 2}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -346,6 +362,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 114674524859188344, guid: dc7ce86838a062347b84fe4e7f87ca43,
+        type: 2}
+      propertyPath: EndPipes.Array.data[0]
+      value: 
+      objectReference: {fileID: 440951466}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc7ce86838a062347b84fe4e7f87ca43, type: 2}
   m_IsPrefabParent: 0
