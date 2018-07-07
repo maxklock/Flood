@@ -57,7 +57,7 @@ namespace Flood
                     return;
                 }
 
-                _localRotation += 10 * new Vector3(Input.GetAxis("CONTROLLER_RIGHT_STICK_VERTICAL"), Input.GetAxis("CONTROLLER_RIGHT_STICK_HORIZONTAL"), 0);
+                _localRotation += 10 * new Vector3(0 /*Input.GetAxis("CONTROLLER_RIGHT_STICK_VERTICAL")*/, Input.GetAxis("CONTROLLER_RIGHT_STICK_HORIZONTAL"), 0);
 
                 _grabbedObject.transform.position = ray.origin + ray.direction * (_grabbedDistance);
                 _grabbedObject.transform.rotation = right.transform.rotation * Quaternion.Euler(_localRotation);
