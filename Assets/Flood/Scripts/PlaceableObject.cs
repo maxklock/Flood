@@ -20,7 +20,12 @@
             {
                 return false;
             }
+
+            GetComponentInChildren<Rigidbody>().isKinematic = true;
+            GetComponent<PipeOnAssemblyLine>().enabled = false;
             GetComponentInChildren<Renderer>().material.color = Color.green;
+
+
             return true;
         }
 
