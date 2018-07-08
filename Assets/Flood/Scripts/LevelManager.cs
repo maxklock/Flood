@@ -1,32 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+namespace Flood
 {
-    public GameObject MRCameraParent;
+    using HoloToolkit.Unity;
+    using HoloToolkit.Unity.InputModule;
 
-    public void LoadScene(string scene)
+    public class LevelManager : MonoBehaviour
     {
-        MRCameraParent.transform.position = Vector3.zero;
-        SceneManager.LoadScene(scene);
-    }
+        public GameObject MRPrefab;
+        private GameObject _mrCameraParent;
+        public string MenuScene = "Menu";
 
-    public void BackToMenu()
-    {
-        
-    }
+        public void LoadScene(string scene)
+        {
+            _mrCameraParent.transform.position = Vector3.zero;
+            SceneManager.LoadScene(scene);
+        }
 
-    // Use this for initialization
-    void Start()
-    {
+        public void BackToMenu()
+        {
+            _mrCameraParent.transform.position = Vector3.zero;
+            SceneManager.LoadScene(MenuScene);
+        }
 
-    }
+        // Use this for initialization
+        private void Awake()
+        {
+            _mrCameraParent = FindObjectOfType<MixedRealityTeleport>()?.gameObject ?? Instantiate(MRPrefab);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        private void Update()
+        {
 
+        }
     }
 }
