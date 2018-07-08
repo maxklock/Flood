@@ -121,6 +121,19 @@ namespace Flood
             }
         }
 
+        public bool IsParticleEnabled(PipeEnd end)
+        {
+            if (_particles == null)
+            {
+                _particles = GetComponentsInChildren<PipeParticle>();
+                if (_particles == null)
+                {
+                    return false;
+                }
+            }
+            return _particles.Where(p => p.End == end).Any(p => p.Particle.isPlaying);
+        }
+
         public void SetClosedEnd(PipeEnd end)
         {
             if (_particles == null)
