@@ -52,6 +52,7 @@
             {
                 LevelEvaluation.Instance.Connected++;
                 LevelEvaluation.Instance.Evaluate();
+                GetComponent<AudioSource>()?.Play();
                 GetComponentInChildren<Renderer>().material = material;
             }
             else

@@ -92,6 +92,8 @@ namespace Flood
                         currentPipe.SetClosedEnd(end);
                     }
 
+                    currentPipe.GetComponent<AudioSource>()?.Stop();
+
                     if (pipesDone.Contains(pipe))
                         continue;
 
