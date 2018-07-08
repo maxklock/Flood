@@ -23,7 +23,8 @@
             var right = ControllerHandler.Instance.RightController;
             if (TeleportMarker.activeSelf && AxisToButtonUtil.Instance.IsUp("CONTROLLER_RIGHT_STICK_VERTICAL"))
             {
-                var camOffset = Vector3.forward * Camera.main.transform.localPosition.z + Vector3.right * Camera.main.transform.localPosition.x;
+                var camOffset = Camera.main.transform.position - ControllerHandler.Instance.MRCameraParent.transform.position;
+                camOffset.y = TeleportMarker.transform.position.y;
                 ControllerHandler.Instance.MRCameraParent.transform.position = TeleportMarker.transform.position - camOffset;
                 return;
             }
