@@ -50,9 +50,7 @@ namespace Flood
             {
                 return;
             }
-
-            _result = Evaluate();
-
+            
             if (_clock.RemainingTime < 0)
             {
                 Finish();
@@ -91,10 +89,10 @@ namespace Flood
             DrawText();
         }
 
-        public EvaluationResult Evaluate()
+        public void Evaluate()
         {
             var results = _pipes.Select(p => p.EvaluatePipes()).ToList();
-            return new EvaluationResult
+            _result = new EvaluationResult
             {
                 OpenEnds = results.Select(r => r.OpenPipes).Aggregate(
                     new List<StartPipe.OpenPipeResult>(),
