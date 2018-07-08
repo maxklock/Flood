@@ -408,16 +408,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 13242433}
     m_Modifications:
-    - target: {fileID: 114674524859188344, guid: dc7ce86838a062347b84fe4e7f87ca43,
-        type: 2}
-      propertyPath: Ends.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114674524859188344, guid: dc7ce86838a062347b84fe4e7f87ca43,
-        type: 2}
-      propertyPath: EndPipes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4213314208398742, guid: dc7ce86838a062347b84fe4e7f87ca43, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1
