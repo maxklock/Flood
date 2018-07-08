@@ -219,7 +219,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: ce63efbbc60a57149945c63f574f210b, type: 3}
+  m_Mesh: {fileID: 4300000, guid: b811d5a0f647da644bc96c1aaac38362, type: 3}
 --- !u!65 &65555214061889018
 BoxCollider:
   m_ObjectHideFlags: 1
