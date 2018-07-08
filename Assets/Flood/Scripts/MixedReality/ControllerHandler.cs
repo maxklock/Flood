@@ -4,6 +4,7 @@
     using System.Linq;
 
     using HoloToolkit.Unity;
+    using HoloToolkit.Unity.InputModule;
 
     using UnityEngine;
     using UnityEngine.XR;
@@ -23,6 +24,10 @@
         // Use this for initialization
         private void Start ()
         {
+            if (MRCameraParent == null)
+            {
+                MRCameraParent = FindObjectOfType<MixedRealityTeleport>().gameObject;
+            }
             LeftController = new GameObject("left");
             LeftController.transform.parent = transform;
 
