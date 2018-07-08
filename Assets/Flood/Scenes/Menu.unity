@@ -160,7 +160,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 22f612988b3e96a4f9e1c81936370ec9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -616,7 +616,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: eed95f61298651a4fb902a34aacfde7e, type: 2}
+      objectReference: {fileID: 2100000, guid: b8f1e0cd8f161ff4086a9f7fadaf9663, type: 2}
     - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
         type: 2}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1631,7 +1631,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: eed95f61298651a4fb902a34aacfde7e, type: 2}
+      objectReference: {fileID: 2100000, guid: b8f1e0cd8f161ff4086a9f7fadaf9663, type: 2}
     - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1902,7 +1902,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: eed95f61298651a4fb902a34aacfde7e, type: 2}
+      objectReference: {fileID: 2100000, guid: b8f1e0cd8f161ff4086a9f7fadaf9663, type: 2}
     - target: {fileID: 4631367745492210, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
       propertyPath: m_LocalScale.y
       value: 1
