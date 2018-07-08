@@ -31,22 +31,6 @@ namespace Flood
             GridManager.Instance.SetCell(gameObject, transform.position, GridPositionState.REAL_WORLD);
         }
 
-        // Update is called once per frame
-        private void Update()
-        {
-            if (AxisToButtonUtil.Instance.IsDown("XBOX_RIGHT_BUMPER"))
-            {
-                var result = EvaluatePipes();
-                foreach (var ends in result.OpenPipes)
-                {
-                    ends.Pipe.GetComponentInChildren<Renderer>().material.color = Color.yellow;
-                }
-                foreach (var ends in EndPipes.Where(p => !result.MissingEndPipes.Contains(p)))
-                {
-                    ends.GetComponentInChildren<Renderer>().material.color = Color.yellow;
-                }
-            }
-        }
 
         private static Vector3 PipeEndToVector3(PipeEnd end)
         {
@@ -85,11 +69,15 @@ namespace Flood
 
                 foreach (var end in currentPipe.Ends)
                 {
-                    currentPipe.SetOpenEnd(end);
+                    var isEnabled = currentPipe.IsParticleEnabled(end);
                     var obj = GridManager.Instance.GetCell(GridManager.Instance.WorldToGrid(currentPipe.transform.position) + PipeEndToVector3(end), GridPositionState.GRID_CELL);
                     var pipe = obj?.GetComponent<Pipe>();
                     if (pipe == null)
                     {
+                        if (!isEnabled)
+                        {
+                            currentPipe.SetOpenEnd(end);
+                        }
                         if (pipesOpen.All(o => o.Pipe != currentPipe))
                             pipesOpen.Add(new OpenPipeResult
                             {
@@ -98,7 +86,11 @@ namespace Flood
                             });
                         continue;
                     }
-                    currentPipe.SetClosedEnd(end);
+
+                    if (isEnabled)
+                    {
+                        currentPipe.SetClosedEnd(end);
+                    }
 
                     if (pipesDone.Contains(pipe))
                         continue;
@@ -113,6 +105,8 @@ namespace Flood
                 }
                 
             }
+
+            Debug.Log($"{pipesOpen.Count}");
 
             return new EvaluationResult
             {
