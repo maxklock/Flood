@@ -14,15 +14,30 @@ namespace Flood.Assembly
 
         public PlaceableObject[] SpawnableObjectPrefab;
 
+        public bool Running = true;
+
         // Use this for initialization
         void Start ()
         {
             _currentSpawnDuration = MaxSpawnDuration;
         }
+
+        public void StopSpawing()
+        {
+            Running = false;
+        }
+
+        public void StartSpawning()
+        {
+            Running = true;
+        }
 	
         // Update is called once per frame
         void Update ()
         {
+            if(!Running)
+                return;
+
             _currentSpawnDuration += Time.deltaTime;
             if (_currentSpawnDuration > MaxSpawnDuration)
             {
