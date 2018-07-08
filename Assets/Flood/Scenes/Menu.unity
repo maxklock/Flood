@@ -512,7 +512,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 654680799}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1328215171}
@@ -794,6 +794,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 654680800}
     m_Modifications:
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0.4
@@ -846,6 +851,36 @@ Prefab:
     - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1271979463}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Gerd
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}

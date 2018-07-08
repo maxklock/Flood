@@ -8,6 +8,8 @@ namespace Flood
 {
     using System.Text;
 
+    using Flood.Assembly;
+
     using HoloToolkit.Unity;
 
     public class LevelEvaluation : SingleInstance<LevelEvaluation>
@@ -83,10 +85,22 @@ namespace Flood
         public void Finish()
         {
             StatsTitle.text = "Finished";
-            Points += (int)_clock.RemainingTime;
+            Points = Math.Max(0, (int)_clock.RemainingTime);
+            _clock.enabled = false;
             _evaluated = true;
+            FindObjectOfType<AssemblyLineSpawner>().enabled = false;
 
             DrawText();
+
+            if ((_result.OpenEnds?.Any() ?? true) || (_result.MissingEnds?.Any() ?? true))
+            {
+                return;
+            }
+
+            foreach (var win in FindObjectsOfType<ParticleWin>())
+            {
+                win.StartParticle();
+            }
         }
 
         public void Evaluate()
