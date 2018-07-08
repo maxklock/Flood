@@ -52,7 +52,11 @@
             {
                 LevelEvaluation.Instance.Connected++;
                 LevelEvaluation.Instance.Evaluate();
-                GetComponent<AudioSource>()?.Play();
+                var audio = GetComponent<AudioSource>();
+                if (audio != null && !audio.isPlaying)
+                {
+                    audio.Play();
+                }
                 GetComponentInChildren<Renderer>().material = material;
             }
             else
