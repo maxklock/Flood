@@ -85,6 +85,7 @@ namespace Flood
 
                 foreach (var end in currentPipe.Ends)
                 {
+                    currentPipe.SetOpenEnd(end);
                     var obj = GridManager.Instance.GetCell(GridManager.Instance.WorldToGrid(currentPipe.transform.position) + PipeEndToVector3(end), GridPositionState.GRID_CELL);
                     var pipe = obj?.GetComponent<Pipe>();
                     if (pipe == null)
@@ -97,6 +98,7 @@ namespace Flood
                             });
                         continue;
                     }
+                    currentPipe.SetClosedEnd(end);
 
                     if (pipesDone.Contains(pipe))
                         continue;
