@@ -92,8 +92,6 @@ namespace Flood
                         currentPipe.SetClosedEnd(end);
                     }
 
-                    currentPipe.GetComponent<AudioSource>()?.Stop();
-
                     if (pipesDone.Contains(pipe))
                         continue;
 
@@ -105,7 +103,19 @@ namespace Flood
                     }
                     pipesProcess.Enqueue(pipe);
                 }
-                
+
+                if (pipesOpen.Any(p => p.Pipe == currentPipe))
+                {
+                    continue;
+                }
+                try
+                {
+                    currentPipe.GetComponent<AudioSource>()?.Stop();
+                }
+                catch
+                {
+
+                }
             }
 
             Debug.Log($"{pipesOpen.Count}");
