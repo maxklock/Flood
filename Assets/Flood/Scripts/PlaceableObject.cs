@@ -46,6 +46,7 @@
             if (placeable)
             {
                 LevelEvaluation.Instance.Connected++;
+                LevelEvaluation.Instance.Evaluate();
                 GetComponentInChildren<Renderer>().material = material;
             }
             else
