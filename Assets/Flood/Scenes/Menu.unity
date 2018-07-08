@@ -574,7 +574,7 @@ Prefab:
     - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
         type: 2}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
       propertyPath: m_LocalPosition.x
@@ -655,12 +655,42 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -0.222
       objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 53230278}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &53230277 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a,
+    type: 2}
+  m_PrefabInternal: {fileID: 53230276}
+--- !u!82 &53230278 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82533703191391378, guid: 652fc39c8526a9f4d82933d183cc378a,
     type: 2}
   m_PrefabInternal: {fileID: 53230276}
 --- !u!1001 &138529278
@@ -1555,7 +1585,7 @@ Prefab:
     - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
         type: 2}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1648,12 +1678,42 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -0.222
       objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1186120683}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 114149496514389150, guid: 652fc39c8526a9f4d82933d183cc378a,
+        type: 2}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 652fc39c8526a9f4d82933d183cc378a, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1186120682 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4509998767557068, guid: 652fc39c8526a9f4d82933d183cc378a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1186120681}
+--- !u!82 &1186120683 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82533703191391378, guid: 652fc39c8526a9f4d82933d183cc378a,
     type: 2}
   m_PrefabInternal: {fileID: 1186120681}
 --- !u!1 &1259239469
