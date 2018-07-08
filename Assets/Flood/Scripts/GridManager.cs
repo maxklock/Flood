@@ -115,6 +115,9 @@
                         if (colliders.Any(c => c.bounds.Contains(point)))
                         {
                             _mainGrid[x, y, z] = obj;
+                            //var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            //cube.transform.localScale = Vector3.one * GridScale;
+                            //cube.transform.position = GridToWorld(new Vector3(x, y, z));
                         }
                     }
                 }
