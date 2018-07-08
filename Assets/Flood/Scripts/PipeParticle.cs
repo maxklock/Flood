@@ -15,6 +15,10 @@ namespace Flood
         {
             Particle = GetComponent<ParticleSystem>();
             Particle.Stop();
+            if (GetComponentInParent<StartPipe>() != null)
+            {
+                Particle.Play();
+            }
         }
 
         // Update is called once per frame

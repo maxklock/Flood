@@ -21,6 +21,11 @@
             return true;
         }
 
+        private void Start()
+        {
+            transform.localScale = Vector3.one * GridManager.Instance.GridScale;
+        }
+
         private void Update()
         {
             if (CanBeTaken)
