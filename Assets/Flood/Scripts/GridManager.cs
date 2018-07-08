@@ -79,6 +79,10 @@
             }
 
             _mainGrid[(int)(coords.x), (int)(coords.y), (int)(coords.z)] = obj;
+            if (obj == null)
+            {
+                return;
+            }
             ApplyGridTransform(obj, coords);
         }
 

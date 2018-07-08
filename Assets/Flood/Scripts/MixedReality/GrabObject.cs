@@ -88,6 +88,10 @@
                 var placeable = GridManager.Instance.SetCellTry(_grabbedObject.gameObject, _grabbedObject.transform.position, GridPositionState.REAL_WORLD);
                 _grabbedObject.GetComponent<Pipe>()?.UpdateEnds(_grabbedObject.transform.eulerAngles);
                 var neighbors = CanBePlaced(_grabbedObject);
+                if (!neighbors)
+                {
+                    GridManager.Instance.SetCell(null, _grabbedObject.transform.position, GridPositionState.REAL_WORLD);
+                }
                 _grabbedObject.Drop(placeable && neighbors, PlacedMaterial);
             }
             if (_ghost != null)
