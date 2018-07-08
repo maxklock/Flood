@@ -66,8 +66,8 @@ namespace Flood
             strBuilder.AppendLine($"{PrefixDropped}{space}{Dropped}");
             strBuilder.AppendLine($"{PrefixPoints}{space}{Points}");
             strBuilder.AppendLine();
-            strBuilder.AppendLine($"{PrefixOpenPipes}{space}{_result.OpenEnds.Count}");
-            strBuilder.AppendLine($"{PrefixMissingsEnds}{space}{_result.MissingEnds.Count}");
+            strBuilder.AppendLine($"{PrefixOpenPipes}{space}{_result.OpenEnds?.Count ?? 0}");
+            strBuilder.AppendLine($"{PrefixMissingsEnds}{space}{_result.MissingEnds?.Count ?? 0}");
             StatsText.text = strBuilder.ToString();
         }
         
